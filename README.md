@@ -1,53 +1,34 @@
-# WayFind — AC215 Project Plan
+# WayFind — AC215
 
-## Tasks and responsibilities
+## Background
 
-Proposed roles; names are to be assigned. Team capacity: five members, 3–4 hours per person per week. Outputs below are planned deliverables, not completion claims.
+WayFind, introduced as **Waypoint** in our MS1 proposal, is a course-and-mentor roadmap project for Harvard SEAS Data Science master's students.
 
-### Member A — Requirements, planning, and validation
+Students need to connect their academic background and career interests with course choices, degree requirements, and potential research mentors. Relevant information is spread across course catalogs, program requirements, faculty profiles, and publications. A useful recommendation must account for these sources and constraints, rather than simply return courses with similar descriptions.
 
-- Define the project scope, degree-rule specification, and acceptance examples.
-- Implement the constraint planner and independent validation checks after MS2, with API integration support from C.
-- Define and test locked-course and minimal-change replanning behavior.
-- Maintain acceptance criteria and evaluate whether outputs satisfy the intended user workflow.
+Our primary users are Data Science master's students. Program advisors and faculty are secondary stakeholders: the project aims to support more informed advising conversations and research inquiries.
 
-**Expected outputs:** Scope and rule specification, five initial test queries, planner and validator, rule and replanning tests.
+## Project task and proposed solution
 
-### Member B — Data and source verification
+Given a student's background, completed courses, interests, and career goal, the proposed system will generate a three-semester course-and-mentor roadmap and update it as the student's situation changes. The proposal considers three goal tracks: tech/ML, quantitative finance, and PhD/research.
 
-- Collect an initial 10-course sample, then expand to approximately 30–50 curated courses.
-- Build ingestion, cleaning, deduplication, and versioned snapshots.
-- Preserve course identifiers, descriptions, terms, source URLs, and uncertainty flags.
-- Coordinate relevance labels and a small, manually verified faculty/publication dataset for later milestones.
+The planned tasks are to:
 
-**Expected outputs:** Reproducible data pipeline, documented schema, versioned course and label datasets, source-backed faculty records.
+1. **Build a versioned data pipeline:** Collect and normalize course information, degree rules, faculty profiles, and publication evidence.
+2. **Retrieve and rank relevant options:** Use retrieval to identify candidates and evaluate a trained relevance ranker against an embedding-similarity baseline.
+3. **Construct and validate course plans:** Apply encoded degree requirements, prerequisites, known term offerings, and known time constraints through a constraint solver and validation checks.
+4. **Ground mentor suggestions in research:** Link faculty recommendations to verified author identities and real publications; do not infer whether a faculty member is accepting students.
+5. **Support adaptive replanning:** Update the roadmap after feedback or changes in completed courses while minimizing unnecessary changes.
 
-### Member C — Retrieval, modeling, and API
+**Proposed workflow:** Student profile → interpretation of goals → candidate retrieval → relevance ranking → constraint solver and validator → roadmap with supporting sources → feedback and replanning.
 
-- Implement chunking, embeddings, vector database integration, and the retrieval API.
-- Train a lightweight course ranker and compare it with an embedding baseline.
-- Track experiments and integrate A's planner and validator into the backend API.
-- Implement evaluation metrics and model-release checks with D.
+The proposal assigns interpretation and explanation to an LLM, relevance scoring to a ranking model, and rule enforcement to the solver and validator. Validity is limited to the audited rules and available data: unknown future offerings, unresolved prerequisites, and approval-dependent requirements must remain explicitly conditional. The output supports advising; it does not constitute official degree approval.
 
-**Expected outputs:** Retrieval service, trained ranker, baseline comparison, documented planning API, evaluation reports.
+**Planned data sources:** Harvard course information and SEAS degree requirements; public faculty profiles; OpenAlex publication records; O*NET career-skill information; team-collected relevance labels; and test student profiles. These are proposal-level sources, not a claim that all integrations are implemented or access conditions have been verified in this repository.
 
-### Member D — Infrastructure and integration
+**Evaluation focus:** Plan validity, source and citation correctness, relevance against baselines, and replanning stability. The initial scope is one degree program and a desktop web application; job search, automated faculty outreach, and predictions about faculty availability are outside scope.
 
-- Set up dependency management, Dockerfiles, and the single-command development pipeline.
-- Coordinate Vertex AI training and pipelines, Cloud Run deployment, and logging.
-- Implement GitHub Actions, Kubernetes deployment, and automated retraining/deployment orchestration.
-- Verify reproducibility, deployment configuration, and scaling behavior.
-
-**Expected outputs:** Containerized workflow, cloud training/pipeline configurations, deployed services, CI/CD workflows, deployment evidence.
-
-### Member E — Frontend and user experience
-
-- Build the input form and retrieval results page from the proposal mockup.
-- Connect the interface to the API and add roadmap, source-detail, and replanning views.
-- Implement loading, error, empty-result, and conditional-plan states.
-- Coordinate user-flow testing and assemble demo materials supplied by the team.
-
-**Expected outputs:** Working frontend, end-to-end user flow, usability feedback, demo screenshots and video assembly.
+**MS2 implementation slice:** A user enters their background and interests; the application retrieves relevant courses from a versioned dataset and displays matching courses, supporting context, and sources. The initial target is 10 sample courses, expanding to approximately 30–50. Full planning, trained ranking, and mentor recommendations follow in later milestones. Outputs below are planned deliverables, not completion claims.
 
 **Shared tasks:** Each member writes their component's tests and documentation and contributes presentation material. Another member verifies each deliverable. All members must understand the complete system; integration and final documentation are not assigned to one person alone.
 
@@ -59,7 +40,7 @@ All deadlines below are in 2026, at **10:00 PM Eastern Time**. Dates and require
 
 **Tasks:** Define the user problem, stakeholders, data sources, success criteria, initial architecture, and application mockup.
 
-**Ownership:** A leads proposal coordination; all members contribute and review.
+**Proposal contribution:** Ming led brainstorming and wrote the main proposal content.
 
 **Expected outputs:** Written proposal and user-flow mockup. The local proposal uses the name Waypoint; this repository is named WayFind.
 
@@ -67,11 +48,11 @@ All deadlines below are in 2026, at **10:00 PM Eastern Time**. Dates and require
 
 **Tasks:**
 
-- A: Finalize scope, rule terminology, and five retrieval acceptance examples.
-- B: Deliver the initial course dataset, preprocessing scripts, and snapshot/version records.
-- C: Implement chunking, embeddings, vector database integration, and query-to-context retrieval.
-- D: Package the components with Docker, `uv`/`pyproject.toml`, configuration examples, and a single-command pipeline.
-- E: Connect the input form to the retrieval API and display results with sources.
+- Ming: Finalize scope, rule terminology, and five retrieval acceptance examples.
+- John: Deliver the initial course dataset, preprocessing scripts, and snapshot/version records.
+- Shravya: Implement chunking, embeddings, vector database integration, and query-to-context retrieval.
+- Tavish: Package the components with Docker, `uv`/`pyproject.toml`, configuration examples, and a single-command pipeline.
+- Akshaya: Connect the input form to the retrieval API and display results with sources.
 
 **Expected outputs:** Reproducible environment, versioned dataset, containerized retrieval pipeline, working app skeleton, setup instructions, environment screenshots, and sample input/output logs. Full roadmap generation, trained ranking, and mentor recommendations are deferred beyond MS2.
 
@@ -83,10 +64,10 @@ All deadlines below are in 2026, at **10:00 PM Eastern Time**. Dates and require
 
 **Tasks:**
 
-- A/B: Encode and audit the supported degree rules; build a baseline planner and independent validator.
-- B/C: Prepare relevance labels, train the course ranker, and compare it against the baseline.
-- C/D: Record experiments, complete a reproducible Vertex AI training run, and automate preprocessing/training/evaluation with a pipeline.
-- C/D/E: Deploy the backend on Cloud Run, add logging, and verify API access and responses.
+- Encode and audit the supported degree rules; build a baseline planner and independent validator.
+- Prepare relevance labels, train the course ranker, and compare it against the baseline.
+- Record experiments, complete a reproducible Vertex AI training run, and automate preprocessing/training/evaluation with a pipeline.
+- Deploy the backend on Cloud Run, add logging, and verify API access and responses.
 
 **Expected outputs:** Tracked training run, model and evaluation artifacts, automated ML pipeline, working planning API, serverless deployment, monitoring logs, API tests, and reproducibility instructions. Unknown future offerings remain conditional rather than verified.
 
@@ -98,10 +79,10 @@ All deadlines below are in 2026, at **10:00 PM Eastern Time**. Dates and require
 
 **Tasks:**
 
-- A/C: Implement locked-course and minimal-change replanning with validation.
-- B/E: Add a small set of source-backed faculty cards and verify displayed evidence.
-- E/C: Complete the roadmap interface, API integration, and visible failure/uncertainty states.
-- All members: Document architecture and add unit, integration, and end-to-end tests; D coordinates CI.
+- Implement locked-course and minimal-change replanning with validation.
+- Add a small set of source-backed faculty cards and verify displayed evidence.
+- Complete the roadmap interface, API integration, and visible failure/uncertainty states.
+- Document architecture, set up CI, and add unit, integration, and end-to-end tests.
 
 **Expected outputs:** Application design document, functioning local end-to-end application, containerized frontend, GitHub Actions CI, test documentation, and at least **50% API/backend code coverage**.
 
@@ -113,10 +94,10 @@ All deadlines below are in 2026, at **10:00 PM Eastern Time**. Dates and require
 
 **Tasks:**
 
-- D, supported by component owners: Complete Kubernetes deployment and demonstrate scaling.
-- C/D: Trigger retraining on data or code updates and deploy models only after documented validation checks pass.
-- All members: Reach at least 70% API/backend line coverage, verify CI/CD, and finalize documentation.
-- E coordinates the demo; all members contribute to the video, blog, and final presentation.
+- Complete Kubernetes deployment and demonstrate scaling.
+- Trigger retraining on data or code updates and deploy models only after documented validation checks pass.
+- Reach at least 70% API/backend line coverage, verify CI/CD, and finalize documentation.
+- Prepare the demo, video, blog, and final presentation.
 
 **Expected outputs:** Publicly accessible cloud application, Kubernetes scaling evidence, deploy-on-merge CI/CD, gated retraining/deployment workflow, at least **70% API/backend line coverage**, final README, a **6-minute MP4 video (at least 720p)**, a **600–800-word Medium post**, and self/peer evaluations.
 

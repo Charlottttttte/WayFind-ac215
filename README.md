@@ -1,170 +1,125 @@
-# WayFind — AC215 Project
+# WayFind — AC215 Project Plan
 
-A course-and-mentor roadmap project for Harvard SEAS Data Science master's students, introduced as **Waypoint** in the MS1 proposal.
+## Tasks and responsibilities
 
-The long-term goal is to combine source-grounded recommendations, explicit degree-rule checks, and adaptive course planning. Any validity claim will be limited to the audited rules and data available to the system; future offerings and unresolved requirements must remain explicitly conditional.
+Proposed roles; names are to be assigned. Team capacity: five members, 3–4 hours per person per week. Outputs below are planned deliverables, not completion claims.
 
-**Current status:** Planning documentation only. The application, data pipeline, and deployment described below are planned deliverables, not completed features. Runnable setup instructions will be added with the implementation.
+### Member A — Requirements, planning, and validation
 
-## MS2 kickoff meeting
+- Define the project scope, degree-rule specification, and acceptance examples.
+- Implement the constraint planner and independent validation checks after MS2, with API integration support from C.
+- Define and test locked-course and minimal-change replanning behavior.
+- Maintain acceptance criteria and evaluate whether outputs satisfy the intended user workflow.
 
-- **Target meeting date:** October 9, 2026; exact time to be agreed by the team.
-- **Duration:** 30 minutes.
-- **Team capacity:** Five members, approximately 3–4 hours per person per week.
-- **MS2 deadline:** October 20, 2026, at 10:00 PM Eastern Time.
-- **Planning status:** Scope and role assignments below are proposals for discussion, not confirmed assignments or TF-approved changes to the final project scope.
+**Expected outputs:** Scope and rule specification, five initial test queries, planner and validator, rule and replanning tests.
 
-### Objective
+### Member B — Data and source verification
 
-Agree on a realistic MS2 scope, assign clear ownership, and establish integration deadlines. Each member should leave with a concrete deliverable, dependencies, and acceptance criteria.
+- Collect an initial 10-course sample, then expand to approximately 30–50 curated courses.
+- Build ingestion, cleaning, deduplication, and versioned snapshots.
+- Preserve course identifiers, descriptions, terms, source URLs, and uncertainty flags.
+- Coordinate relevance labels and a small, manually verified faculty/publication dataset for later milestones.
 
-### Proposed MS2 user flow
+**Expected outputs:** Reproducible data pipeline, documented schema, versioned course and label datasets, source-backed faculty records.
 
-> A user enters their background and interests. The application retrieves relevant courses from a versioned dataset and displays matching courses, supporting context, and source references.
+### Member C — Retrieval, modeling, and API
 
-The proposed initial scope is one degree program, one primary interest direction, and approximately 30–50 curated courses. The course count is a team planning target, not a course requirement.
+- Implement chunking, embeddings, vector database integration, and the retrieval API.
+- Train a lightweight course ranker and compare it with an embedding baseline.
+- Track experiments and integrate A's planner and validator into the backend API.
+- Implement evaluation metrics and model-release checks with D.
 
-The trained ranker, constraint solver, full three-semester roadmap, mentor recommendation workflow, and adaptive replanning are deferred beyond MS2. This sequencing does not by itself remove them from the final project. Any roadmap placeholders must be labeled as illustrative; retrieval results must not be presented as a verified graduation plan.
+**Expected outputs:** Retrieval service, trained ranker, baseline comparison, documented planning API, evaluation reports.
 
-### Agenda
+### Member D — Infrastructure and integration
 
-1. **Current status and availability — 5 minutes**
-   - Confirm each member's available work periods, relevant experience, and existing work.
-   - Check GitHub and course-data access; check GCP access early for later milestones.
-   - Record access blockers and who will resolve them. Local execution is sufficient for the MS2 environment evidence.
+- Set up dependency management, Dockerfiles, and the single-command development pipeline.
+- Coordinate Vertex AI training and pipelines, Cloud Run deployment, and logging.
+- Implement GitHub Actions, Kubernetes deployment, and automated retraining/deployment orchestration.
+- Verify reproducibility, deployment configuration, and scaling behavior.
 
-2. **Confirm MS2 scope — 5 minutes**
-   - Agree on the target user, initial course subset, and minimum user flow.
-   - Identify deferred features and any proposed scope changes to discuss with the TF.
+**Expected outputs:** Containerized workflow, cloud training/pipeline configurations, deployed services, CI/CD workflows, deployment evidence.
 
-3. **Agree on data and interfaces — 7 minutes**
-   - Decide the course schema, snapshot location, and data-versioning approach.
-   - Agree on the retrieval API request and response fields.
-   - Establish a small shared sample so frontend, retrieval, and container work can proceed in parallel.
+### Member E — Frontend and user experience
 
-4. **Assign responsibilities — 8 minutes**
-   - Assign one named owner to each workstream below.
-   - Confirm deadlines, dependencies, and who will verify each deliverable.
+- Build the input form and retrieval results page from the proposal mockup.
+- Connect the interface to the API and add roadmap, source-detail, and replanning views.
+- Implement loading, error, empty-result, and conditional-plan states.
+- Coordinate user-flow testing and assemble demo materials supplied by the team.
 
-5. **Set checkpoints — 5 minutes**
-   - Schedule the first integrated demo and feature freeze.
-   - Choose the submission owner and reviewer.
+**Expected outputs:** Working frontend, end-to-end user flow, usability feedback, demo screenshots and video assembly.
 
-## Proposed task allocation
+**Shared tasks:** Each member writes their component's tests and documentation and contributes presentation material. Another member verifies each deliverable. All members must understand the complete system; integration and final documentation are not assigned to one person alone.
 
-Roles A–E are placeholders to be assigned during the meeting. Each member owns the documentation and basic verification for their component. Work should fit the stated weekly capacity; optional features yield to integration and reproducibility.
+## Milestone timeline and expected outputs
 
-### Member A — Scope, requirements, and acceptance criteria
+All deadlines below are in 2026, at **10:00 PM Eastern Time**. Dates and requirements follow the [official course milestones](https://harvard-iacs.github.io/2026-AC215/projects/). Product scope reductions remain proposals to align with the TF.
 
-Suggested for the member who led brainstorming and proposal writing, subject to team agreement.
+### MS1 — Proposal | September 29
 
-- Write a one-page MS2 scope statement.
-- Clarify degree-rule terminology and its implications for the data schema, checking the applicable cohort and official sources rather than treating proposal prose as an executable specification.
-- Prepare five representative queries with expected relevant courses or supporting evidence. These are smoke-test examples, not a full recommendation benchmark.
-- Review whether the integrated application addresses the intended user need.
-- Provide the problem statement and scope slides.
+**Tasks:** Define the user problem, stakeholders, data sources, success criteria, initial architecture, and application mockup.
 
-**Deliverable:** Agreed scope, documented requirements, and five acceptance examples.
+**Ownership:** A leads proposal coordination; all members contribute and review.
 
-**Boundary:** This role does not include writing everyone's documentation or taking over unfinished integration work.
+**Expected outputs:** Written proposal and user-flow mockup. The local proposal uses the name Waypoint; this repository is named WayFind.
 
-### Member B — Data collection and preprocessing
+### MS2 — Data pipeline and application skeleton | October 20
 
-- Deliver an initial sample of 10 real courses, then expand to approximately 30–50.
-- Implement ingestion, cleaning, and deduplication.
-- Preserve course identifiers, descriptions, terms, source URLs, retrieval dates, and missing or uncertain fields.
-- Save raw and processed snapshots and record their versions.
-- Document access requirements and permitted use. If API access blocks progress, propose an appropriately sourced public-data subset rather than waiting for a full catalog.
+**Tasks:**
 
-**Deliverable:** A reproducible preprocessing command and versioned dataset with traceable sources.
+- A: Finalize scope, rule terminology, and five retrieval acceptance examples.
+- B: Deliver the initial course dataset, preprocessing scripts, and snapshot/version records.
+- C: Implement chunking, embeddings, vector database integration, and query-to-context retrieval.
+- D: Package the components with Docker, `uv`/`pyproject.toml`, configuration examples, and a single-command pipeline.
+- E: Connect the input form to the retrieval API and display results with sources.
 
-**Dependency:** Agree on fields with A and C before expanding the sample.
+**Expected outputs:** Reproducible environment, versioned dataset, containerized retrieval pipeline, working app skeleton, setup instructions, environment screenshots, and sample input/output logs. Full roadmap generation, trained ranking, and mentor recommendations are deferred beyond MS2.
 
-### Member C — Retrieval pipeline and backend API
+**Internal timeline:** October 12 — sample data and API contract; October 15 — integrated retrieval demo; October 18 — feature freeze and clean-checkout verification; October 19 — final checks and slides.
 
-- Implement chunking, embeddings, and vector database integration.
-- Build a minimal proposed `/search` endpoint; finalize its contract with E.
-- Return matching courses, retrieved context, and source references.
-- Run the five acceptance queries and document failures.
-- Add basic retrieval and API tests.
+**Submission:** `milestone2` branch and full commit hash on Canvas; slides for the TF evaluation. [MS2 requirements](https://harvard-iacs.github.io/2026-AC215/milestone2/)
 
-**Deliverable:** A working query-to-context retrieval flow accessible through the API.
+### MS3 — Model and backend integration | November 12
 
-**Dependency:** Start with B's 10-course sample; do not wait for the full dataset.
+**Tasks:**
 
-### Member D — Environment, containers, and integration
+- A/B: Encode and audit the supported degree rules; build a baseline planner and independent validator.
+- B/C: Prepare relevance labels, train the course ranker, and compare it against the baseline.
+- C/D: Record experiments, complete a reproducible Vertex AI training run, and automate preprocessing/training/evaluation with a pipeline.
+- C/D/E: Deploy the backend on Cloud Run, add logging, and verify API access and responses.
 
-- Establish repository structure and dependency management.
-- Coordinate Dockerfiles, `uv`/`pyproject.toml` configuration, and Docker Compose.
-- Connect ingestion, indexing, backend, and frontend into a documented workflow.
-- Provide configuration examples without credentials and exact startup instructions.
-- Coordinate a clean-checkout run by another member and collect environment evidence and logs.
+**Expected outputs:** Tracked training run, model and evaluation artifacts, automated ML pipeline, working planning API, serverless deployment, monitoring logs, API tests, and reproducibility instructions. Unknown future offerings remain conditional rather than verified.
 
-**Deliverable:** A reproducible, single-command pipeline with documented prerequisites and execution evidence.
+**Internal timeline:** November 1 — initial training and baseline comparison; November 8 — cloud API and pipeline working; November 11 — evidence and integration checks complete.
 
-**Boundary:** Component authors supply their dependencies and execution instructions; D coordinates integration rather than implementing every component.
+**Submission:** `milestone3` branch and full commit hash on Canvas; slides and running-system evidence. [MS3 requirements](https://harvard-iacs.github.io/2026-AC215/milestone3/)
 
-### Member E — Frontend and demo coordination
+### MS4 — Complete user workflow and CI | December 1
 
-- Reuse the proposal's onboarding and results-page design.
-- Connect the input form to the retrieval API.
-- Display course results and supporting sources.
-- Implement loading, empty-result, and request-error states.
-- Assemble application screenshots and slides contributed by the team.
+**Tasks:**
 
-**Deliverable:** A usable application skeleton showing a real frontend-to-backend interaction.
+- A/C: Implement locked-course and minimal-change replanning with validation.
+- B/E: Add a small set of source-backed faculty cards and verify displayed evidence.
+- E/C: Complete the roadmap interface, API integration, and visible failure/uncertainty states.
+- All members: Document architecture and add unit, integration, and end-to-end tests; D coordinates CI.
 
-**Dependency:** Use the agreed response fixture while C implements the API, then replace the fixture with the live endpoint before the integration demo.
+**Expected outputs:** Application design document, functioning local end-to-end application, containerized frontend, GitHub Actions CI, test documentation, and at least **50% API/backend code coverage**.
 
-## Shared working agreements
+**Internal timeline:** November 22 — complete primary user flow and an early Kubernetes smoke deployment; November 29 — freeze features and complete MS4 evidence. The early cluster check is an internal risk-reduction target for MS5.
 
-- Deliver a small working sample before expanding functionality.
-- Keep data fields and API responses consistent with the agreed contract; communicate changes before merging them.
-- Document and test your own component, including how to run it.
-- Have another member verify each deliverable. A successful run on the author's machine alone is insufficient.
-- Report blockers early, with a proposed fallback.
-- Keep credentials out of Git and redact sensitive information in screenshots and logs.
-- All members must understand the complete system and be prepared to explain components they did not author.
-- The submission owner verifies completeness and submits the agreed commit; they are not responsible for finishing everyone else's work.
+**Submission:** `milestone4` branch and full commit hash on Canvas; slides and frontend/API demo evidence. [MS4 requirements](https://harvard-iacs.github.io/2026-AC215/milestone4/)
 
-## Checkpoints
+### MS5 — Deployment and final delivery | December 11
 
-- **October 9:** Confirm scope, role owners, access, and meeting decisions.
-- **October 12:** Share the first 10 courses and finalize the schema and API contract.
-- **October 15:** Demonstrate user input → retrieval → results with sources.
-- **October 18:** Freeze MS2 features; verify containerized execution and data-version tracking from a clean checkout.
-- **October 19:** Fix remaining issues, finalize evidence, and rehearse the presentation.
-- **October 20:** Submit the full commit hash from the `milestone2` branch by 10:00 PM ET.
+**Tasks:**
 
-Dates before October 20 are proposed internal checkpoints. The submission branch must be created and verified before submission; this README does not indicate that it already exists.
+- D, supported by component owners: Complete Kubernetes deployment and demonstrate scaling.
+- C/D: Trigger retraining on data or code updates and deploy models only after documented validation checks pass.
+- All members: Reach at least 70% API/backend line coverage, verify CI/CD, and finalize documentation.
+- E coordinates the demo; all members contribute to the video, blog, and final presentation.
 
-## MS2 completion checklist
+**Expected outputs:** Publicly accessible cloud application, Kubernetes scaling evidence, deploy-on-merge CI/CD, gated retraining/deployment workflow, at least **70% API/backend line coverage**, final README, a **6-minute MP4 video (at least 720p)**, a **600–800-word Medium post**, and self/peer evaluations.
 
-These unchecked items track planned work. Consult the official instructions for the authoritative requirements.
+**Internal timeline:** December 6 — engineering checks complete; December 7 — release freeze; December 9 — demo rehearsal; **December 10 — live showcase**; December 11 — final submission.
 
-- [ ] Document the working environment and include a screenshot of a running local or cloud instance.
-- [ ] Containerize the pipeline components and provide build and dependency instructions, including the required `uv`/`pyproject.toml` setup.
-- [ ] Make the pipeline runnable with one documented command after prerequisites and configuration are in place.
-- [ ] Record the data version used by each component.
-- [ ] Demonstrate collection, chunking, vectorization, vector database integration, and one complete query-to-context retrieval example.
-- [ ] Preserve pipeline logs and a small sample input/output artifact.
-- [ ] Provide the mockup and a minimal working frontend/backend interaction.
-- [ ] Document exact setup and execution steps and verify them with another member.
-- [ ] Prepare slides for the 15-minute TF presentation and team-wide Q&A.
-- [ ] Verify the `milestone2` branch and submit its full commit hash on Canvas.
-
-## Decisions to record at the meeting
-
-- Named owner and reviewer for each workstream.
-- Confirmed MS2 scope and deferred features.
-- Data source, schema, storage location, and versioning approach.
-- API request/response contract.
-- Integration-demo time on October 15.
-- Submission owner and reviewer.
-
-## Course references
-
-- [AC215 course website](https://harvard-iacs.github.io/2026-AC215/)
-- [Official Milestone 2 instructions](https://harvard-iacs.github.io/2026-AC215/milestone2/)
-
-Deadline and MS2 requirements checked on October 9, 2026. Follow subsequent course-staff updates if requirements change.
+**Submission:** `main` branch/repository link, video, blog link, and self/peer reviews through the course portal. No late submissions. [MS5 requirements](https://harvard-iacs.github.io/2026-AC215/milestone5/)

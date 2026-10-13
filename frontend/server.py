@@ -60,7 +60,12 @@ class Handler(BaseHTTPRequestHandler):
         if type(top_k) is not int or not 1 <= top_k <= 20:
             return self.error(400, 'top_k must be an integer from 1 to 20')
         # Only configuration chooses the upstream; browser input cannot choose a URL.
-        url = self.server.search_api_url
+        url = getattr(self.server, 'search_api_url', os.getenv('SEARCH_API_URL', ''))
+        if not url:
+            return self.reply(503, b'{"code":"SEARCH_NOT_CONFIGURED","error":"Live search is not connected yet"}')
+        from urllib.parse import urlparse
+        if urlparse(url).scheme not in ('http', 'https'):
+            return self.error(503, 'Search service is not configured correctly')
         request = Request(url, data=json.dumps({'query': data['query'], 'top_k': top_k}).encode(),
                           headers={'Content-Type': 'application/json', 'Accept': 'application/json'}, method='POST')
         try:

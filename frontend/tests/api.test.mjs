@@ -24,11 +24,15 @@ test('search posts the contract and accepts zero results',async()=>{
   }});assert.deepEqual(data.results,[]);
 });
 test('HTTP, network, invalid JSON, and malformed results do not return mock data',async()=>{
-  await assert.rejects(searchCourses({}, {fetchImpl:async()=>({ok:false,status:503})}),/503/);
+  await assert.rejects(searchCourses({}, {fetchImpl:async()=>({ok:false,status:503,json:async()=>({})})}),/503/);
   await assert.rejects(searchCourses({}, {fetchImpl:async()=>{throw new TypeError('fetch failed');}}),/Could not reach/);
   await assert.rejects(searchCourses({}, {fetchImpl:async()=>({ok:true,json:async()=>{throw new SyntaxError();}})}),/unreadable/);
   await assert.rejects(searchCourses({}, {fetchImpl:async()=>({ok:true,json:async()=>({})})}),/unexpected/);
 });
 test('slow search times out',async()=>{
   await assert.rejects(searchCourses({}, {timeoutMs:5,fetchImpl:(_url,{signal})=>new Promise((_resolve,reject)=>signal.addEventListener('abort',()=>reject(new DOMException('Aborted','AbortError'))))}),/too long/);
+});
+test('unconfigured hosted search explains how to preview without pretending it is live',async()=>{
+  await assert.rejects(searchCourses({}, {fetchImpl:async()=>({ok:false,status:503,json:async()=>({code:'SEARCH_NOT_CONFIGURED'})})}),/not connected yet/);
+  await assert.rejects(searchCourses({}, {fetchImpl:async()=>({ok:false,status:502,json:async()=>{throw new SyntaxError();}})}),/502/);
 });

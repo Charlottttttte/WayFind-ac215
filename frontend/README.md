@@ -34,6 +34,10 @@ For Tavish's root Compose pipeline, use build context `./frontend`, container po
 
 The container has pinned Python/uv image tags, a committed uv lockfile, a non-root user, and a `/health` endpoint. Health confirms only that the frontend serves requests, not that retrieval is available. This standard-library server is intended for the local MS2 demo, not an internet production deployment.
 
+## Host on Vercel
+
+See [VERCEL.md](VERCEL.md) for deployment and backend configuration. Use `frontend` as the project root. The hosted frontend provides an explicit sample search; real retrieval still requires the deployed backend endpoint.
+
 ## API and data boundary
 
 See [API_CONTRACT.md](API_CONTRACT.md). The contract is a **frontend proposal pending agreement with Shravya**, because the backend currently contains only a README. The UI preserves the result order and displays returned context, source URLs, dataset version, retrieval date, and uncertainty. Missing metadata stays visibly unknown; it is not inferred.

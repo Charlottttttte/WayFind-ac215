@@ -1,5 +1,19 @@
 # Frontend verification - October 13, 2026
 
+## Vercel follow-up
+
+Hosted frontend: https://wayfind-ac215.vercel.app. Deployment ID: `dpl_83QamqhMJkhM4nrV2Fc5EX6zwjQa`.
+
+- Increased form and supporting-text sizes, added an explicit sample-search entry point, and scroll to results after successful mobile search.
+- 7 JavaScript tests and 8 Python HTTP/proxy/adapter tests passed (15 total).
+- Vercel's Python 3.12 build completed successfully; static homepage, stylesheet, and JavaScript returned HTTP 200 without authentication.
+- Hosted synthetic search returned two labeled fixture cards. Switching back to live search displayed the explicit backend-not-connected message.
+- Hosted `POST /search` returned HTTP 503 with `SEARCH_NOT_CONFIGURED`, as expected without `SEARCH_API_URL`.
+- The project is in the `portfolio-website12` Vercel workspace. GitHub auto-deploy connection was unsuccessful; this deployment used the CLI. A future push alone will not update the site until Git integration is connected.
+- Backend hosting and real retrieval remain pending. The public site is a working interface preview, not a completed RAG deployment.
+
+The checks below record the earlier local/container validation. Container checks predate the Vercel adapter changes; the current adapter and shared proxy were verified by the HTTP tests above.
+
 Scope: local MS2 frontend and proxy. Base: `6dab78dfe754a9d8cb91aa912a92a40b7c9c4b5f` on `main`.
 
 ## Observed checks

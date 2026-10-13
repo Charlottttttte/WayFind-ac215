@@ -30,7 +30,11 @@ export async function searchCourses(payload, {fetchImpl = globalThis.fetch, time
   const timeout = setTimeout(() => controller.abort(), timeoutMs);
   try {
     const response = await fetchImpl('/search', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload), signal:controller.signal});
-    if (!response.ok) throw new Error(`Search is unavailable (HTTP ${response.status}). Please try again shortly.`);
+    if (!response.ok) {
+      const problem = await response.json().catch(() => ({}));
+      if (problem.code === 'SEARCH_NOT_CONFIGURED') throw new Error('Live course search is not connected yet. Use “Try a sample search” to explore the interface.');
+      throw new Error(`Search is unavailable (HTTP ${response.status}). Please try again shortly.`);
+    }
     return normalizeResponse(await response.json());
   } catch (error) {
     if (error.name === 'AbortError') throw new Error('Search took too long. Please try again.');

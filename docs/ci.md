@@ -22,6 +22,24 @@ Current coverage is the frontend and its proxy/adapter. It does not establish re
 
 ## Requiring checks before merge
 
-Creating the workflow displays pass/fail checks; it does not itself block merging. A repository admin can select the three job names above as required status checks in a branch ruleset for `main` and `milestone2`, after they have run. The current collaborator account has push access but not admin access, so this change does not modify branch rules or merge any PR.
+Creating the workflow displays pass/fail checks; it does not itself block merging. The versioned [required-checks ruleset](../.github/rulesets/required-pr-checks.json) defines the repository's intended merge policy. **The JSON is a configuration template, not an active GitHub setting.** The current collaborator account has push access but not admin access; no ruleset has been activated by this change.
+
+The prepared ruleset requires pull requests and all three checks from the GitHub Actions app before merging into the default branch (`main`) or any `milestone*` branch. The PR must be tested against the latest target-branch code. There are no configured bypass actors. Feature branches remain writable so contributors can push code for CI to test. The policy applies to every contributor, not only Akshaya; the tests currently cover the frontend component.
+
+One-time setup by the repository owner/admin:
+
+1. Review and merge the workflow and its test implementation in PR #8 into `main`, then update any existing milestone branches to include it.
+2. Open **Settings → Rules → Rulesets → New ruleset → Import a ruleset** and import `.github/rulesets/required-pr-checks.json`.
+3. Confirm the target branches, check names, and **Active** enforcement, then save.
+4. Confirm a PR to `main` shows the checks as required. A failed or pending check must prevent merging.
+
+Alternatively, an administrator can apply the same file from the repository root:
+
+```sh
+gh api --method POST repos/Charlottttttte/WayFind-ac215/rulesets \
+  --input .github/rulesets/required-pr-checks.json
+```
+
+Inspect existing rulesets before applying this command so it does not create duplicates. [GitHub's ruleset API](https://docs.github.com/en/rest/repos/rules#create-a-repository-ruleset) requires repository Administration write permission. Required-check names and GitHub Actions app ID in the file were verified against a successful PR run.
 
 For PRs that do not yet include the workflow, it becomes available after this change is merged into their base branch. Avoid path-based workflow exclusions if these checks become mandatory, since excluded workflows can leave required checks pending.

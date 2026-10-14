@@ -1,6 +1,6 @@
 # Proposed MS2 search contract
 
-**Status: pending agreement with Shravya.** This documents the shape consumed by the frontend, not an existing backend capability. Adjust this adapter and its tests when the backend contract is agreed.
+**Status: implemented by the backend; pending Akshaya's confirmation.** [backend/](../backend/README.md#api) serves this shape at `POST /search` without changes to this adapter. `course_id` is the catalog code (e.g. `APCOMP 209A`); the numeric Harvard ID is the extra field `harvard_course_id`. `dataset_version` is the ingestion snapshot ID when the CSV provides one, otherwise `sha256-<12 hex>` of the input file. Blank or oversized queries and out-of-range `top_k` return 422; retrieval failures return 503 `{"error": "Search service unavailable"}`. The backend also returns `embedding_model`, `score`, `chunk_id`, `requirement_area`, and `harvard_course_id`, which this adapter ignores.
 
 ## Request
 
@@ -46,7 +46,7 @@ The browser aborts after 15 seconds. The proxy uses a 12-second upstream timeout
 
 ## Integration gate
 
-- [ ] Shravya agrees on endpoint, method, fields, IDs, timeout expectations, and error semantics.
+- [x] Shravya agrees on endpoint, method, fields, IDs, timeout expectations, and error semantics. Typical latency is 40–200 ms, well under the 12-second proxy timeout.
 - [ ] Tavish confirms shared-network backend service name and port.
 - [ ] John supplies the snapshot ID and source metadata that the API returns.
 - [ ] Run Ming's five acceptance queries against the real pipeline and save input/output plus failures.

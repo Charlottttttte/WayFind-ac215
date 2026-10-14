@@ -1,0 +1,6 @@
+*
+!pyproject.toml
+!uv.lock
+!wayfind_retrieval/
+!wayfind_retrieval/**
+**/__pycache__

@@ -1,0 +1,9 @@
+[project]
+name = "wayfind-frontend"
+version = "0.1.0"
+description = "WayFind MS2 frontend server and search proxy"
+requires-python = ">=3.12"
+dependencies = []
+
+[tool.uv]
+package = false

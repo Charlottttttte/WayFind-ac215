@@ -1,0 +1,15 @@
+2026-10-14 09:57:22,612 INFO wayfind.index: Embedding 46 chunks from 36 courses with all-MiniLM-L6-v2 (onnx)
+2026-10-14 09:57:24,606 INFO wayfind.index: Index written to /index (dataset sha256-09fc6649582f)
+{
+  "dataset_version": "sha256-09fc6649582f",
+  "dataset_sha256": "09fc6649582ff140cab0e50a7fdfe555cf80c2b1d4de7758ad94b1e8e8d20b88",
+  "dataset_path": "/data/scraped_sheet1.csv",
+  "embedding_model": "all-MiniLM-L6-v2 (onnx)",
+  "embedding_dimensions": 384,
+  "distance": "cosine",
+  "max_chunk_words": 120,
+  "courses": 36,
+  "chunks": 46,
+  "courses_without_description": 0,
+  "built_at": "2026-10-14T09:57:24+00:00"
+}

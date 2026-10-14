@@ -1,0 +1,31 @@
+# Backend component pipeline: build the vector index, then serve /search.
+# Tavish owns the repository-wide Compose workflow; reuse these two services there.
+services:
+  indexer:
+    build: .
+    image: wayfind-backend:local
+    command: ["/app/.venv/bin/python", "-m", "wayfind_retrieval.index"]
+    environment: &backend-env
+      WAYFIND_DATA_PATH: /data/${WAYFIND_DATA_FILE:-scraped_sheet1.csv}
+      WAYFIND_INDEX_DIR: /index
+      WAYFIND_DATASET_VERSION: ${WAYFIND_DATASET_VERSION:-}
+      WAYFIND_MIN_SCORE: ${WAYFIND_MIN_SCORE:-0.25}
+    volumes:
+      - ../data:/data:ro
+      - index:/index
+
+  backend:
+    image: wayfind-backend:local
+    pull_policy: never  # built by the indexer service; never look for it on Docker Hub
+    depends_on:
+      indexer:
+        condition: service_completed_successfully
+    environment: *backend-env
+    volumes:
+      - ../data:/data:ro
+      - index:/index
+    ports:
+      - "127.0.0.1:${BACKEND_PORT:-8000}:8000"
+
+volumes:
+  index:

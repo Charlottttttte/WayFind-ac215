@@ -26,7 +26,9 @@
         "required_status_checks": [
           {"context": "JavaScript tests", "integration_id": 15368},
           {"context": "Python and API tests", "integration_id": 15368},
-          {"context": "Docker build and smoke test", "integration_id": 15368}
+          {"context": "Docker build and smoke test", "integration_id": 15368},
+          {"context": "Backend retrieval tests", "integration_id": 15368},
+          {"context": "Backend Docker build and retrieval smoke test", "integration_id": 15368}
         ],
         "strict_required_status_checks_policy": true
       }

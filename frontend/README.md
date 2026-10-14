@@ -46,6 +46,8 @@ Profile fields are combined into a query, not enforced as filters. Completed cou
 
 ## Checks
 
+GitHub runs these tests and a container smoke test automatically on pull requests. See [PR checks](../docs/ci.md) for job details and required-check setup.
+
 From the repository root, with Node.js 18+ and Python 3.12+:
 
 ```sh

@@ -1,0 +1,87 @@
+name: PR checks
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+  push:
+    branches: [main, milestone2]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pr-checks-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  javascript:
+    name: JavaScript tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - name: Test query mapping, response validation, and failure handling
+        run: node --test frontend/tests/api.test.mjs
+
+  python:
+    name: Python and API tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.12'
+      - name: Test local HTTP proxy and Vercel adapter
+        run: python -m unittest discover -s frontend/tests -v
+
+  container:
+    name: Docker build and smoke test
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: Build the frontend with frozen dependencies
+        run: docker build --tag wayfind-frontend:ci frontend
+      - name: Start the isolated test container
+        run: >-
+          docker run --detach --name wayfind-frontend-ci
+          --publish 127.0.0.1:8080:8080
+          --env SEARCH_API_URL=http://127.0.0.1:1/search
+          wayfind-frontend:ci
+      - name: Check startup, public assets, and backend-unavailable response
+        shell: bash
+        run: |
+          for attempt in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:8080/health > /tmp/wayfind-health.json; then
+              break
+            fi
+            sleep 1
+          done
+          python -c 'import json; assert json.load(open("/tmp/wayfind-health.json")) == {"status": "ok", "component": "frontend"}'
+          for asset in / /style.css /app.js /api.mjs /mock.mjs; do
+            curl --fail --silent --show-error "http://127.0.0.1:8080${asset}" --output /dev/null
+          done
+          status=$(curl --silent --show-error --output /tmp/wayfind-search.json --write-out '%{http_code}' \
+            --header 'Content-Type: application/json' \
+            --data '{"query":"interpretable machine learning","top_k":5}' \
+            http://127.0.0.1:8080/search)
+          test "$status" = '503'
+          python -c 'import json; assert json.load(open("/tmp/wayfind-search.json")) == {"error": "Search service unavailable"}'
+      - name: Show container logs
+        if: always()
+        run: docker logs wayfind-frontend-ci || true
+      - name: Clean up the test container
+        if: always()
+        run: docker rm --force wayfind-frontend-ci || true

@@ -20,7 +20,7 @@ npx vercel deploy --prod
 
 Use the existing project/scope selected by `vercel link`. The local `.vercel/` directory and environment files are ignored by Git. `.vercelignore` excludes environment files, tests, screenshots, and local environments from uploads.
 
-For Git-based deployment later, choose repository `Charlottttttte/WayFind-ac215`, Root Directory `frontend`, and the branch containing this implementation. The implementation is currently in the draft frontend PR; `main` contains only its placeholder until the team merges it. Connecting the Git repository is optional for CLI deployment.
+Production deployment is controlled by [GitHub Actions](../docs/ci.md): a push to `main` runs the JavaScript, Python/API, and Docker checks, then deploys only if all pass. Keep the separate Vercel Git auto-deployment disconnected to preserve this test gate. The workflow uploads `frontend/` to the existing linked project and requires the three documented GitHub Actions secrets. Manual CLI deployment remains available for recovery; it bypasses the automated CI gate.
 
 ## Verify
 

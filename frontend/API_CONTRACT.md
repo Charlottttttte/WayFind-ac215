@@ -51,5 +51,3 @@ The browser aborts after 15 seconds. The proxy uses a 12-second upstream timeout
 - [ ] John supplies the snapshot ID and source metadata that the API returns.
 - [ ] Run Ming's five acceptance queries against the real pipeline and save input/output plus failures.
 - [ ] Another team member reproduces the UI-to-retrieval flow from a clean checkout.
-
-Related issue: [#4](https://github.com/Charlottttttte/WayFind-ac215/issues/4).

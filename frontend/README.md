@@ -34,9 +34,9 @@ For Tavish's root Compose pipeline, use build context `./frontend`, container po
 
 The container has pinned Python/uv image tags, a committed uv lockfile, a non-root user, and a `/health` endpoint. Health confirms only that the frontend serves requests, not that retrieval is available. This standard-library server is intended for the local MS2 demo, not an internet production deployment.
 
-## Host on Vercel
+## Milestone 2 scope
 
-See [VERCEL.md](VERCEL.md) for deployment and backend configuration. Use `frontend` as the project root. The hosted frontend provides an explicit sample search; real retrieval still requires the deployed backend endpoint.
+Run the frontend locally or with Docker for this milestone. Public hosting and deployment are deferred to a later milestone.
 
 ## API and data boundary
 
@@ -47,6 +47,5 @@ Profile fields are combined into a query, not enforced as filters. Completed cou
 ## Manual verification
 
 Manual checks: submit a whitespace-only query; run all three synthetic scenarios; retry after error; deselect synthetic mode and verify a backend-unavailable error; repeat at a narrow viewport. Confirm inputs remain editable, old results clear, status is announced, and unsafe source schemes cannot become links.
-
 
 See [VERIFICATION.md](VERIFICATION.md) for the earlier frontend observations and [the integration report](../docs/ms2/integration-report.md) for the team’s recorded container run.

@@ -1,0 +1,29 @@
+{
+  "queries": [
+    {
+      "id": "q1",
+      "query": "Interests: I want to learn Bayesian models and statistical inference.\nCareer goal: PhD / research",
+      "relevant": ["STAT 120", "STAT 220"]
+    },
+    {
+      "id": "q2",
+      "query": "Interests: I want to build transformer-based question answering systems for natural language.\nCareer goal: Tech / ML",
+      "relevant": ["COMPSCI 1870"]
+    },
+    {
+      "id": "q3",
+      "query": "Interests: I want a team capstone project using real-world data with a partner organization.\nCareer goal: Tech / ML",
+      "relevant": ["APCOMP 297R"]
+    },
+    {
+      "id": "q4",
+      "query": "Interests: I want to study routing and software-defined networking for large-scale networks.\nCareer goal: Tech / ML",
+      "relevant": ["COMPSCI 1450"]
+    },
+    {
+      "id": "q5",
+      "query": "Interests: I want to learn parallel programming with MPI and CUDA for scientific computing.\nCareer goal: Tech / ML",
+      "relevant": ["COMPSCI 2050"]
+    }
+  ]
+}

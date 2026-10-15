@@ -1,0 +1,4 @@
+NAME                       IMAGE                    COMMAND                  SERVICE    CREATED         STATUS                                     PORTS
+wayfind-ac215-backend-1    wayfind-backend:local    "/app/.venv/bin/pyth…"   backend    9 seconds ago   Up 6 seconds (healthy)                     127.0.0.1:8000->8000/tcp
+wayfind-ac215-frontend-1   wayfind-ac215-frontend   "/app/.venv/bin/pyth…"   frontend   9 seconds ago   Up Less than a second (health: starting)   127.0.0.1:8080->8080/tcp
+wayfind-ac215-indexer-1    wayfind-backend:local    "/app/.venv/bin/pyth…"   indexer    9 seconds ago   Exited (0) 6 seconds ago                   

@@ -1,0 +1,101 @@
+{
+  "dataset_version": "sha256-09fc6649582f",
+  "embedding_model": "all-MiniLM-L6-v2 (onnx)",
+  "results": [
+    {
+      "course_id": "STAT 120",
+      "title": "Introduction to Bayesian Inference and Applications",
+      "term": "2026 Fall",
+      "description": "Provides students a comprehensive understanding to the questions as of what is, how and why Bayesian. Introduction to classic Bayesian models, basic computational algorithms/methods for Bayesian inference, as well as their applications in various domain fields, and comparisons with classic Frequentist methods. As Bayesian inference finds its roots and merits particularly in application, this course puts great emphasis on enhancing students' hands-on skills in statistical computation (mostly with R) and data analysis. Course site: https://locator.tlt.harvard.edu/course/colgsas-156425/2026/fall/17188",
+      "context": "Provides students a comprehensive understanding to the questions as of what is, how and why Bayesian. Introduction to classic Bayesian models, basic computational algorithms/methods for Bayesian inference, as well as their applications in various domain fields, and comparisons with classic Frequentist methods. As Bayesian inference finds its roots and merits particularly in application, this course puts great emphasis on enhancing students' hands-on skills in statistical computation (mostly with R) and data analysis.",
+      "source_urls": [
+        "https://www.coursicle.com/harvard/courses/STAT/120/",
+        "https://courses.my.harvard.edu/dw_course/fas_crse_cat.pdf",
+        "https://seas.harvard.edu/masters-data-science/degree-requirements",
+        "https://locator.tlt.harvard.edu/course/colgsas-156425/2026/fall/17188"
+      ],
+      "retrieved_at": "2026-10-08",
+      "missing_or_uncertain_fields": [],
+      "score": 0.6213,
+      "chunk_id": "STAT 120#0",
+      "requirement_area": "Statistics elective",
+      "harvard_course_id": "156425"
+    },
+    {
+      "course_id": "STAT 220",
+      "title": "Bayesian Inference",
+      "term": "2026 Spring",
+      "description": "Bayesian theory, methods, and applications. Bayesian regression models, exponential family models, mixture models, and hierarchical models. Decision analysis and frequentist properties. Model checking and model comparison. Notes: For Spring 2026, STAT 220 D001 (M 4:30-5:45pm) will meet in Maxwell-Dworkin 223. Course site: https://locator.tlt.harvard.edu/course/colgsas-118016/2025/spring/20174",
+      "context": "Bayesian theory, methods, and applications. Bayesian regression models, exponential family models, mixture models, and hierarchical models. Decision analysis and frequentist properties. Model checking and model comparison.",
+      "source_urls": [
+        "https://www.coursicle.com/harvard/courses/STAT/220/",
+        "https://courses.my.harvard.edu/dw_course/fas_crse_cat.pdf",
+        "https://seas.harvard.edu/masters-data-science/degree-requirements",
+        "https://locator.tlt.harvard.edu/course/colgsas-118016/2025/spring/20174"
+      ],
+      "retrieved_at": "2026-10-08",
+      "missing_or_uncertain_fields": [],
+      "score": 0.5835,
+      "chunk_id": "STAT 220#0",
+      "requirement_area": "Statistics elective",
+      "harvard_course_id": "118016"
+    },
+    {
+      "course_id": "STAT 111",
+      "title": "Introduction to Statistical Inference",
+      "term": "2027 Spring",
+      "description": "Introduction to the principles and methods of statistical inference, as a framework for achieving the three main goals of statistics: describing data and a phenomenon of interest, predicting one variable using another variable, and drawing causal conclusions about the effect of one variable on another. Frequentist and Bayesian perspectives on model building, learning from data, and making decisions under uncertainty. A three-pronged approach is emphasized, combining theory, simulation, and data. Notes: The following STAT 111 sections will meet in Maxwell-Dworkin in Spring 2026: D001: M 10:30-11:45am MD 234 D008: T 3-4:15pm MD 234 D014: Th 3-4:15pm MD 234 D017: F 1:30-2:45pm MD 234 Course site: https://locator.tlt.harvard.edu/course/colgsas-111036/2025/spring/13018",
+      "context": "Introduction to the principles and methods of statistical inference, as a framework for achieving the three main goals of statistics: describing data and a phenomenon of interest, predicting one variable using another variable, and drawing causal conclusions about the effect of one variable on another. Frequentist and Bayesian perspectives on model building, learning from data, and making decisions under uncertainty. A three-pronged approach is emphasized, combining theory, simulation, and data.",
+      "source_urls": [
+        "https://www.coursicle.com/harvard/courses/STAT/111/",
+        "https://courses.my.harvard.edu/dw_course/fas_crse_cat.pdf",
+        "https://seas.harvard.edu/masters-data-science/degree-requirements",
+        "https://locator.tlt.harvard.edu/course/colgsas-111036/2025/spring/13018"
+      ],
+      "retrieved_at": "2026-10-08",
+      "missing_or_uncertain_fields": [],
+      "score": 0.5067,
+      "chunk_id": "STAT 111#0",
+      "requirement_area": "Data Science/Machine Learning",
+      "harvard_course_id": "111036"
+    },
+    {
+      "course_id": "APCOMP 209A",
+      "title": "Data Science 1: Introduction to Data Science",
+      "term": "2026 Fall",
+      "description": "Data Science 1 is the first half of a one-year introduction to data science. The course focuses on the analysis of messy, real-life data to make predictions using statistical and machine learning methods. Material covered integrates the five key facets of an investigation using data: (1) data collection – data wrangling and cleaning to obtain a suitable dataset; (2) data management – accessing data quickly and reliably; (3) exploratory data analysis – generating hypotheses and building intuition; (4) prediction or statistical learning – developing and applying models such as linear and logistic regression, k-nearest neighbors, decision trees, and probabilistic approaches based on Bayes’ rule; and (5) communication – summarizing results through visualization, storytelling, and interpretable summaries.This is the first part of a two-course sequence. The curriculum builds throughout the academic year, and students are strongly encouraged to enroll in both the fall and spring courses within the same academic year. Notes: Only one of CS 1090a, CS 109a, AC 209a, Stat 109a, or Stat 121a can be taken for credit. Course site: https://locator.tlt.harvard.edu/course/colgsas-109898/2026/fall/11851",
+      "context": "The course focuses on the analysis of messy, real-life data to make predictions using statistical and machine learning methods. Material covered integrates the five key facets of an investigation using data: (1) data collection – data wrangling and cleaning to obtain a suitable dataset; (2) data management – accessing data quickly and reliably; (3) exploratory data analysis – generating hypotheses and building intuition; (4) prediction or statistical learning – developing and applying models such as linear and logistic regression, k-nearest neighbors, decision trees, and probabilistic approaches based on Bayes’ rule; and (5) communication – summarizing results through visualization, storytelling, and interpretable summaries.This is the first part of a two-course sequence.",
+      "source_urls": [
+        "https://www.coursicle.com/harvard/courses/APCOMP/209A/",
+        "https://seas.harvard.edu/masters-data-science/courses",
+        "https://seas.harvard.edu/masters-data-science/degree-requirements",
+        "https://locator.tlt.harvard.edu/course/colgsas-109898/2026/fall/11851"
+      ],
+      "retrieved_at": "2026-10-08",
+      "missing_or_uncertain_fields": [],
+      "score": 0.3869,
+      "chunk_id": "APCOMP 209A#1",
+      "requirement_area": "Data Science/Machine Learning",
+      "harvard_course_id": "109898"
+    },
+    {
+      "course_id": "APCOMP 209B",
+      "title": "Data Science 2: Advanced Topics in Data Science",
+      "term": "2027 Spring",
+      "description": "Data Science 2 is the second half of a one-year introduction to data science. Building upon the material in Data Science 1, the course introduces advanced methods for statistical modeling, representation, and prediction. Topics include multiple deep learning architectures such as CNNs, RNNs, transformers, language models, autoencoders, and generative models as well as basic Bayesian methods, and unsupervised learning. Students are strongly encouraged to enroll in both the fall and spring course within the same academic year. Part two of a two-part series. Notes: Can only be taken after successful completion of CS 1090a, CS 109a, AC 209a, Stat 109a, or Stat 121a, or equivalent. Course site: https://locator.tlt.harvard.edu/course/colgsas-203547/2025/spring/12036",
+      "context": "Data Science 2 is the second half of a one-year introduction to data science. Building upon the material in Data Science 1, the course introduces advanced methods for statistical modeling, representation, and prediction. Topics include multiple deep learning architectures such as CNNs, RNNs, transformers, language models, autoencoders, and generative models as well as basic Bayesian methods, and unsupervised learning. Students are strongly encouraged to enroll in both the fall and spring course within the same academic year. Part two of a two-part series.",
+      "source_urls": [
+        "https://www.coursicle.com/harvard/courses/APCOMP/209B/",
+        "https://my.harvard.edu/course/APCOMP209B/2027-Spring/Full-Term/001",
+        "https://seas.harvard.edu/masters-data-science/degree-requirements",
+        "https://locator.tlt.harvard.edu/course/colgsas-203547/2025/spring/12036"
+      ],
+      "retrieved_at": "2026-10-08",
+      "missing_or_uncertain_fields": [],
+      "score": 0.3812,
+      "chunk_id": "APCOMP 209B#0",
+      "requirement_area": "Data Science/Machine Learning",
+      "harvard_course_id": "203547"
+    }
+  ]
+}

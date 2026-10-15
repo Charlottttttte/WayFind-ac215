@@ -1,0 +1,43 @@
+
+services:
+  indexer:
+    build: ./backend
+    image: wayfind-backend:local
+    command:
+      - /app/.venv/bin/python
+      - -m
+      - wayfind_retrieval.index
+    environment:
+      WAYFIND_DATA_PATH: /data/scraped_sheet1.csv
+      WAYFIND_INDEX_DIR: /index
+    volumes:
+      - ./data:/data:ro
+      - course_index:/index
+
+  backend:
+    image: wayfind-backend:local
+    pull_policy: never
+    depends_on:
+      indexer:
+        condition: service_completed_successfully
+    environment:
+      WAYFIND_DATA_PATH: /data/scraped_sheet1.csv
+      WAYFIND_INDEX_DIR: /index
+    volumes:
+      - ./data:/data:ro
+      - course_index:/index
+    ports:
+      - "127.0.0.1:8000:8000"
+
+  frontend:
+    build: ./frontend
+    depends_on:
+      backend:
+        condition: service_healthy
+    environment:
+      SEARCH_API_URL: http://backend:8000/search
+    ports:
+      - "127.0.0.1:8080:8080"
+
+volumes:
+  course_index:

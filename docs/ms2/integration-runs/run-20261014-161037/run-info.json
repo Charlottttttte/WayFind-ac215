@@ -1,0 +1,31 @@
+{
+  "run_date": "2026-10-14T16:10:37-04:00",
+  "verifier": "Local test by Tavish (peer reproduction not yet verified)",
+  "git_branch": "tavish/ms2-integration",
+  "git_base_commit_before_documentation": "daadcb9fdc52acee1a4f13345975656e6276b90c",
+  "note": "The branch may contain uncommitted changes. This SHA does not identify the final integrated PR commit.",
+  "operating_system": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "docker_engine_version": "29.8.0",
+  "docker_compose_version": "5.5.1",
+  "startup_command": "docker compose up -d --build",
+  "data_file": "data/scraped_sheet1.csv",
+  "data_file_sha256": "09fc6649582ff140cab0e50a7fdfe555cf80c2b1d4de7758ad94b1e8e8d20b88",
+  "csv_rows": 37,
+  "retrieved_at_dates": [
+    "2026-10-08"
+  ],
+  "dataset_version": "sha256-09fc6649582f",
+  "retrieval_model": "all-MiniLM-L6-v2 (onnx)",
+  "course_count_in_index": 36,
+  "chunk_count_in_index": 46,
+  "test_query": "Interests: Bayesian statistics\nCareer goal: PhD / research",
+  "test_result_course_ids": [
+    "STAT 120",
+    "STAT 220",
+    "STAT 111",
+    "APCOMP 209A",
+    "APCOMP 209B"
+  ],
+  "test_result_count": 5,
+  "result_includes_source_links": true
+}

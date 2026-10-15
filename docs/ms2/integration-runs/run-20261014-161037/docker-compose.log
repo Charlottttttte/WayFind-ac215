@@ -1,0 +1,27 @@
+indexer-1  | 2026-10-14 20:10:30,824 INFO wayfind.index: Index in /index is current; reusing it
+indexer-1  | {
+indexer-1  |   "dataset_version": "sha256-09fc6649582f",
+indexer-1  |   "dataset_sha256": "09fc6649582ff140cab0e50a7fdfe555cf80c2b1d4de7758ad94b1e8e8d20b88",
+indexer-1  |   "dataset_path": "/data/scraped_sheet1.csv",
+indexer-1  |   "embedding_model": "all-MiniLM-L6-v2 (onnx)",
+indexer-1  |   "embedding_dimensions": 384,
+indexer-1  |   "distance": "cosine",
+indexer-1  |   "max_chunk_words": 120,
+indexer-1  |   "courses": 36,
+indexer-1  |   "chunks": 46,
+indexer-1  |   "courses_without_description": 0,
+frontend-1  | WayFind frontend: http://0.0.0.0:8080
+frontend-1  | 172.18.0.1 - - [14/Oct/2026 20:10:37] "GET /health HTTP/1.1" 200 -
+indexer-1   |   "built_at": "2026-10-14T18:55:10+00:00"
+indexer-1   | }
+frontend-1  | 172.18.0.1 - - [14/Oct/2026 20:10:37] "POST /search HTTP/1.1" 200 -
+backend-1   | INFO:     Started server process [1]
+backend-1   | INFO:     Waiting for application startup.
+backend-1   | 2026-10-14 20:10:32,859 INFO wayfind.index: Index in /index is current; reusing it
+backend-1   | 2026-10-14 20:10:32,974 INFO wayfind.api: Serving dataset sha256-09fc6649582f
+backend-1   | INFO:     Application startup complete.
+backend-1   | INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+backend-1   | INFO:     127.0.0.1:42172 - "GET /health HTTP/1.1" 200 OK
+backend-1   | INFO:     172.18.0.1:59024 - "GET /health HTTP/1.1" 200 OK
+backend-1   | 2026-10-14 20:10:37,500 INFO wayfind.api: search query_chars=58 top_k=5 results=['STAT 120', 'STAT 220', 'STAT 111', 'APCOMP 209A', 'APCOMP 209B'] latency_ms=370
+backend-1   | INFO:     172.18.0.3:36662 - "POST /search HTTP/1.1" 200 OK

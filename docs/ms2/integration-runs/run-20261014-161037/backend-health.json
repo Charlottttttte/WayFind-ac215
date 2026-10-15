@@ -1,0 +1,8 @@
+{
+  "status": "ok",
+  "component": "backend",
+  "dataset_version": "sha256-09fc6649582f",
+  "embedding_model": "all-MiniLM-L6-v2 (onnx)",
+  "courses": 36,
+  "chunks": 46
+}

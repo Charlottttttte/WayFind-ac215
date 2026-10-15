@@ -104,3 +104,52 @@ All deadlines below are in 2026, at **10:00 PM Eastern Time**. Dates and require
 **Internal timeline:** December 6 — engineering checks complete; December 7 — release freeze; December 9 — demo rehearsal; **December 10 — live showcase**; December 11 — final submission.
 
 **Submission:** `main` branch/repository link, video, blog link, and self/peer reviews through the course portal. No late submissions. [MS5 requirements](https://harvard-iacs.github.io/2026-AC215/milestone5/)
+
+<!-- BEGIN WAYFIND MS2 LOCAL SETUP -->
+## Run MS2 locally: complete application
+
+The repository-wide [Compose configuration](compose.yaml) starts three services using the
+component Dockerfiles: **indexer** (one-time course vector-index build), **backend**
+(FastAPI retrieval service), and **frontend** (course explorer website and search proxy).
+
+**Requirements:** Git and Docker Desktop (macOS/Windows) or Docker Engine with Compose
+(Linux). Start the Docker engine before running the commands below.
+
+From the **repository root** (the directory containing `compose.yaml`):
+
+```sh
+docker compose up -d --build
+```
+
+The initial build downloads Python dependencies and the local embedding model, so it
+can take several minutes. Subsequent builds generally reuse Docker's cache.
+Docker waits for indexing to complete before starting the backend and for the
+backend to become healthy before starting the frontend.
+
+- Web application: <http://127.0.0.1:8080> (use **live search**, not synthetic preview)
+- Backend health: <http://127.0.0.1:8000/health>
+- Frontend health: <http://127.0.0.1:8080/health>
+
+Try a query from the website, or test the full proxy path:
+
+```sh
+curl -fsS http://127.0.0.1:8080/search \
+  -H 'Content-Type: application/json' \
+  -d '{"query":"Bayesian statistics","top_k":5}'
+```
+
+**Useful commands:**
+
+```sh
+docker compose ps                 # inspect service status
+docker compose logs --no-color   # inspect service logs
+docker compose down              # stop/remove services; keeps the index volume
+docker compose up -d             # restart in the background
+```
+
+The ingestion source is the committed `data/scraped_sheet1.csv`. This Compose workflow
+indexes the snapshot; it **does not** scrape new data. See `backend/README.md` for the
+retriever, `frontend/README.md` for the UI, and
+[`docs/ms2/integration-report.md`](docs/ms2/integration-report.md) for verified
+local integration evidence and remaining peer-verification steps.
+<!-- END WAYFIND MS2 LOCAL SETUP -->

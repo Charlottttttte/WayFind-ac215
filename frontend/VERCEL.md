@@ -20,7 +20,7 @@ npx vercel deploy --prod
 
 Use the existing project/scope selected by `vercel link`. The local `.vercel/` directory and environment files are ignored by Git. `.vercelignore` excludes environment files, tests, screenshots, and local environments from uploads.
 
-Production deployment is controlled by [GitHub Actions](../docs/ci.md): a push to `main` runs the JavaScript, Python/API, and Docker checks, then deploys only if all pass. Keep the separate Vercel Git auto-deployment disconnected to preserve this test gate. The workflow uploads `frontend/` to the existing linked project and requires the three documented GitHub Actions secrets. Manual CLI deployment remains available for recovery; it bypasses the automated CI gate.
+Deployment is manual through the CLI commands above. GitHub Actions deployment has been removed from the Milestone 2 repository; pushing or merging code does not update this hosted preview.
 
 ## Verify
 

@@ -120,7 +120,7 @@ Fields beyond the contract (`embedding_model`, `score`, `chunk_id`, `requirement
 uv run pytest --cov --cov-report=term-missing
 ```
 
-46 tests, 95% line coverage. They cover CSV parsing and offering merges, chunk windows, index reuse/rebuild/failure, best-chunk-per-course ranking, the score threshold, the API contract and errors, log privacy, and metric math. Tests use the hashing embedder and the synthetic fixture, so they run offline in about 1 second. CI also builds the Docker image and checks real-model retrieval on the fixture (see [docs/ci.md](../docs/ci.md)).
+46 tests, 95% line coverage. They cover CSV parsing and offering merges, chunk windows, index reuse/rebuild/failure, best-chunk-per-course ranking, the score threshold, the API contract and errors, log privacy, and metric math. Tests use the hashing embedder and the synthetic fixture, so they run offline in about 1 second. These backend tests remain available to run locally; automated GitHub CI has been removed from the Milestone 2 scope.
 
 ## Known limitations
 
